@@ -65,13 +65,13 @@ export const HomeScreen = () => {
     return (
         <View style={styles.home}>
             <Image
-                style={styles.home__bg}
+                style={styles.backgroundImage}
                 blurRadius={70}
                 source={require('../assets/images/bg.png')}
             />
             {
                 loading ? (
-                    <View style={{ flex: 1, flexDirection: "row", justifyContent: "center", alignItems: "center", backgroundColor: "transparent" }}>
+                    <View style={styles.loaderContainer}>
                         <ActivityIndicator size={"large"} />
                     </View>
                 ) : (
@@ -163,8 +163,8 @@ export const HomeScreen = () => {
                             </View>
                         </View>
                         {/* forecast section for next days */}
-                        <View style={{ width: "90%", height: "17%"}}>
-                            <View style={{ display: "flex", flexDirection: "row", alignItems: "center", marginBottom: 10 }}>
+                        <View style={styles.nextDaysContainer}>
+                            <View style={styles.nextDaysCalendarContainer}>
                                 <CalendarDaysIcon size="22" color="white" />
                                 <Text style={{ color: "white", fontSize: 17, padding: 0, margin: 0 }}> Daily forecast</Text>
                             </View>
@@ -180,18 +180,7 @@ export const HomeScreen = () => {
                                     dayName = dayName.split(',')[0];
                                     return (
                                         <View
-                                            style={{
-                                                display: "flex",
-                                                flexDirection: "column",
-                                                justifyContent: "center",
-                                                alignItems: "center",
-                                                gap: 5,
-                                                backgroundColor: theme.bgWhite(0.15),
-                                                height: "80%",
-                                                borderRadius: 20,
-                                                paddingHorizontal: 5,
-                                                width: 100,
-                                            }}
+                                            style={styles.nextDaysItem}
                                             key={index}
                                         >
                                             <Image style={{ width: 45, height: 45 }} source={weatherImages[item?.day?.condition?.text]}/>
@@ -215,7 +204,7 @@ const styles= StyleSheet.create({
         flex: 1,
         position: "relative",
     },
-    home__bg: {
+    backgroundImage: {
         zIndex: 0,
         height: "100%",
         width: "100%",
@@ -346,4 +335,34 @@ const styles= StyleSheet.create({
         width: 24,
         height: 24,
     },
+    loaderContainer: {
+        flex: 1,
+        flexDirection: "row",
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundColor: "transparent",
+    },
+    nextDaysContainer: {
+        width: "90%",
+        height: "17%",
+    },
+    nextDaysCalendarContainer: {
+        display: "flex",
+        flexDirection: "row",
+        alignItems: "center",
+        marginBottom: 10,
+    },
+    nextDaysItem: {
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+        gap: 5,
+        backgroundColor: theme.bgWhite(0.15),
+        height: "80%",
+        borderRadius: 20,
+        paddingHorizontal: 5,
+        width: 100,
+    },
+
 });
